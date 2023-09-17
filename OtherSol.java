@@ -37,12 +37,12 @@ public class OtherSol {
 		}
 		for (int digit = 0; digit <= 9; digit++) {
 			for (int m = 0; m < maxM; m++) {
-				dp[digit][m] = dfs(digit, m);
+				dp[digit][m] = recurse(digit, m);
 			}
 		}
 	}
 	
-	static long dfs(int digit, int m) {
+	static long recurse(int digit, int m) {
 		if (m == 0) {
 			dp[digit][m] = 1;
 		}
@@ -50,10 +50,10 @@ public class OtherSol {
 			return dp[digit][m];
 		}
 		if (digit < 9) {
-			dp[digit][m] = dfs(digit + 1, m - 1) % mod;
+			dp[digit][m] = recurse(digit + 1, m - 1) % mod;
 			return dp[digit][m];
 		}
-		long value = (dfs(1, m - 1) + dfs(0, m - 1)) % mod;
+		long value = (recurse(1, m - 1) + recurse(0, m - 1)) % mod;
 		dp[digit][m] = value;
 		return dp[digit][m];
 	}
